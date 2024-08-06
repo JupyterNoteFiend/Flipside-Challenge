@@ -252,9 +252,6 @@ def render_grail_impact():
         ]
     )
 
-    # Placeholder for anomaly detection (implement as needed)
-    anomaly_chart = px.line(df, x='block_timestamp', y='amount_usd', title='Anomaly Detection')
-
     return html.Div([
         dbc.Row([
             dbc.Col(dcc.Graph(figure=volume_comparison_chart), width=12, className="p-2", style={"border": "1px solid #ddd", "border-radius": "5px"}),
