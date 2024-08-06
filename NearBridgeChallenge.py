@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import pandas as pd
 import plotly.graph_objects as go
+from dash_bootstrap_templates import load_figure_template
 
 # Load the data
 df = pd.read_excel("NEAR_01012024_07282024_data.xlsx")
@@ -23,7 +24,8 @@ before_program_data = df[df['block_timestamp'] < program_start_date]
 after_program_data = df[df['block_timestamp'] > program_end_date]
 
 # Initialize the Dash app
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG])
+load_figure_template('morph')
+app = Dash(__name__, external_stylesheets=[dbc.themes.MORPH])
 
 # Define the layout of the dashboard
 app.layout = dbc.Container([
@@ -135,7 +137,7 @@ def render_user_behavior():
     holding_periods_distribution = px.histogram(
         non_zero_holding_periods_df, 
         x='duration_minutes', 
-        nbins=10, 
+        nbins=30, # Increased number of bins for better granularity
         title='Holding Period Length Distribution (Minutes)'
     )
 
@@ -177,7 +179,6 @@ def render_user_behavior():
     )
 
     return html.Div([
-        html.H3("User Behavior"),
         dbc.Row([
             dbc.Col(html.H4(f"User Retention Rate Post Program: {user_retention:.2%}"), className="mb-4")
         ]),
@@ -207,7 +208,7 @@ def render_grail_impact():
 
     # Create a DataFrame for the normalized volumes
     program_impact = pd.DataFrame({
-        'Phase': ['Before Program ', 'During Program', 'After Program'],
+        'Phase': ['Before Program', 'During Program', 'After Program'],
         'Volume per Week': [before_volume_per_week, during_volume_per_week, after_volume_per_week]
     })
 
@@ -255,7 +256,6 @@ def render_grail_impact():
     anomaly_chart = px.line(df, x='block_timestamp', y='amount_usd', title='Anomaly Detection')
 
     return html.Div([
-        html.H3("Grail Program Impact"),
         dbc.Row([
             dbc.Col(dcc.Graph(figure=volume_comparison_chart), width=12, className="p-2", style={"border": "1px solid #ddd", "border-radius": "5px"}),
         ]),
