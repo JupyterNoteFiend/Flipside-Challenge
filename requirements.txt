@@ -5,3 +5,4 @@ dash-bootstrap-components
 gunicorn
 openpyxl
 dash_bootstrap_templates
+scikit-learn
