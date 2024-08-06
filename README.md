@@ -12,8 +12,8 @@ This project is a web-based analytics dashboard for the Grail Program 2024, whic
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/grail-program-analytics.git
-    cd grail-program-analytics
+    git clone https://github.com/JupyterNoteFiend/Flipside-Challenge.git
+    cd Flipside-Challenge
     ```
 
 2. Create and activate a virtual environment:
