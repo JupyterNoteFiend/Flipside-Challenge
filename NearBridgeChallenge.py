@@ -142,7 +142,8 @@ def render_user_behavior():
     # Identify the initial bridging date for each user
     initial_bridge_date = df.groupby('source_address')['block_timestamp'].min().reset_index()
     initial_bridge_date.columns = ['source_address', 'initial_bridge_date']
-
+    initial_bridge_date = initial_bridge_date[initial_bridge_date['initial_bridge_date'] >= program_start_date]
+    
     # Merge initial bridging date with the main dataframe
     df_merged = df.merge(initial_bridge_date, on='source_address')
 
